@@ -58,12 +58,6 @@ Crear un API que se conecte a la base de datos de la aplicación, realizando las
     # Crear nuevo servicio
     POST /service/create
     ~~~
-- **Eliminar nuevos servicios** <span style="color:orange">(Se requieren permisos de administrador) (opcional)</span>
-
-    ~~~sh
-    # Eliminar servicio
-    DELETE /service/{service_id}
-    ~~~
 - **Obtener la lista de servicios** (uno especifico o todos)
     ~~~sh
     # Obtener todos los servicios
