@@ -1,9 +1,4 @@
 # Backend
-API wich is connected to business logic
-
-## Referencias
-[Planeación](https://miro.com/app/board/uXjVO_NmmaE=/?share_link_id=466171238038) - Miro board
-
 ## Objetivos
 Crear un API que se conecte a la base de datos de la aplicación, realizando las siguientes funciones:
 
@@ -66,3 +61,9 @@ Crear un API que se conecte a la base de datos de la aplicación, realizando las
     # Obtener servicio por id
     GET /service/{service_id}
     ~~~
+<br>
+
+## Referencias
+[Planeación](https://miro.com/app/board/uXjVO_NmmaE=/?share_link_id=466171238038) - Miro board
+
+[Diagrama entidad relación](SS-20220731171812.png)
