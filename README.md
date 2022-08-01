@@ -14,9 +14,6 @@ Crear un API que se conecte a la base de datos de la aplicación, realizando las
     ~~~sh
     # Obtener todas las transacciones
     GET /supplier/{supplier_id}/wallet/transaction
-
-    # Obtener las transacciones por id
-    GET /supplier/{supplier_id}/wallet/transaction/{transaction_id}
     ~~~
 - **Usar servicios** (se podrá usar una vez o N veces - dependiendo del servicio)
     ~~~sh
@@ -50,8 +47,11 @@ Crear un API que se conecte a la base de datos de la aplicación, realizando las
 ---
 - **Crear nuevos servicios** <span style="color:orange">(Se requieren permisos de administrador) (opcional)</span>
     ~~~sh
-    # Crear nuevo servicio
-    POST /service/create
+    POST /service
+    ~~~
+- **Eliminar servicios** <span style="color:orange">(Se requieren permisos de administrador) (opcional)</span>
+    ~~~sh
+    DELETE /service
     ~~~
 - **Obtener la lista de servicios** (uno especifico o todos)
     ~~~sh

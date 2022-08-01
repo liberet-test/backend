@@ -19,7 +19,7 @@ class Service(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
     price = Column(Integer, nullable=False)
-    icon_url = Column(String(255), nullable=False)
+    icon_url = Column(String(255), nullable=False, default="/home/ivan/Projects/personal/liberet-test/backend/icons/1.png")
     transactions = relationship("Transaction", back_populates="service", cascade="all, delete-orphan")
 
 
