@@ -10,7 +10,7 @@ class Database:
     user = os.getenv("DB_USER")
     password = os.getenv("DB_PASSWORD")
     host = os.getenv("DB_HOST")
-    name = os.getenv("DB_DATABASE")
+    name = os.getenv("DB_NAME")
     
     def __init__(self) -> None:
         # Connect client

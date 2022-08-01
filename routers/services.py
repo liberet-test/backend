@@ -5,10 +5,13 @@ from entities import Service
 import schemas
 
 router = APIRouter()
+
+# TODO: Modificar la creación de la base de datos
 database = Database()
-# database.drop()
-# database = Database()
-# database.init()
+database.drop()
+database = Database()
+database.init()
+
 session = database.get_session()
 
 @router.get(
