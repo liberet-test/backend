@@ -23,7 +23,7 @@ database = Database()
 session = database.get_session()
 
 class Recharge(BaseModel):
-    amount: int = Body(description="Amount to recharge")
+    amount: int = Body(title="Amount to recharge")
     
     class Config:
         schema_extra = {
@@ -33,21 +33,21 @@ class Recharge(BaseModel):
         }
 
 class TransactionORM(BaseModel):
-    id: int = Body(description="Transaction ID")
-    supplier_id: int = Body(description="Supplier id")
-    service_id: int = Body(description="Service id")
-    income: bool = Body(description="Income")
-    quantity: int = Body(description="Quantity")
-    credits: int = Body(description="Credits")
+    id: int
+    supplier_id: int
+    service_id: int
+    income: bool
+    quantity: int
+    credits: int
     
     class Config:
         orm_mode = True
 
 class SupplierORM(BaseModel):
-    id: int = Body(description="Supplier ID")
-    name: str = Body(description="Supplier name")
-    image_url: str = Body(description="Supplier image url")
-    credits: int = Body(description="Supplier credits")
+    id: int
+    name: str
+    image_url: str
+    credits: int
     
     class Config:
         orm_mode = True
