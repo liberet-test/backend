@@ -7,7 +7,7 @@ Crear un API que se conecte a la base de datos de la aplicación, realizando las
 #### Wallet
 - **Hacer una recarga de créditos** a la wallet del usuario
     ~~~sh
-    POST /supplier/{supplier_id}/wallet/recharge
+    PATCH /supplier/{supplier_id}/wallet/recharge
     ~~~
 
 - **Obtener los eventos** de uso de credito

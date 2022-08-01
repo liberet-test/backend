@@ -6,45 +6,60 @@ from entities import Base, Service, Supplier
 
 load_dotenv()
 
-user = os.getenv("DB_USER")
-password = os.getenv("DB_PASSWORD")
-host = os.getenv("DB_HOST")
-database = os.getenv("DB_DATABASE")
+class Database:
+    user = os.getenv("DB_USER")
+    password = os.getenv("DB_PASSWORD")
+    host = os.getenv("DB_HOST")
+    name = os.getenv("DB_DATABASE")
+    
+    def __init__(self) -> None:
+        # Connect client
+        self.engine = create_engine(f"mysql://{self.user}:{self.password}@{self.host}")
 
-# Connect to the database
-if os.getenv("ENVIRONMENT") == 'development':
-    engine = create_engine(
-        f"mysql://{user}:{password}@{host}", echo=True)
-else:
-    engine = create_engine(
-        f"mysql://{user}:{password}@{host}")
+        # Create database
+        self.engine.execute(f"CREATE DATABASE IF NOT EXISTS {self.name}")
+        self.engine.execute(f"USE {self.name}")
 
-# Create database
-def create():
-    engine.execute(f"CREATE DATABASE IF NOT EXISTS {database}")
-    engine.execute(f"USE {database}")
 
-    Base.metadata.create_all(engine)
+    def get_session(self) -> Session:
+        return Session(self.engine)
 
-    with Session(engine) as session:
+    def init(self) -> Session:
+        """Create default data
 
-        service1 = Service(
-            name="nuevo producto",
-            price="5",
-            icon_url='/home/ivan/Projects/personal/liberet-test/database/icons/1.png'
-        )
-        service2 = Service(
-            name="lanzar campaña de marketing",
-            price="1",
-            icon_url='/home/ivan/Projects/personal/liberet-test/database/icons/megafono.png'
-        )
+        Returns:
+            Session: Connection to database
+        """
 
-        liberet = Supplier(name="Liberet", credits=100)
+        Base.metadata.create_all(self.engine)
+        with Session(self.engine) as session:
+            # Create default data
+            service1 = Service(
+                name="nuevo producto",
+                price="5",
+                icon_url='/home/ivan/Projects/personal/liberet-test/database/icons/1.png'
+            )
+            service2 = Service(
+                name="lanzar campaña de marketing",
+                price="1",
+                icon_url='/home/ivan/Projects/personal/liberet-test/database/icons/megafono.png'
+            )
+            
+            service3 = Service(
+                name="Recarga",
+                price="0",
+                icon_url='/home/ivan/Projects/personal/liberet-test/database/icons/megafono.png'
+            )
 
-        session.add_all([service1, service2, liberet])
+            liberet = Supplier(name="Liberet", credits=100)
 
-        session.commit()
+            session.add_all([service1, service2, service3, liberet])
 
-def drop():
-    engine.execute(f"DROP DATABASE IF EXISTS {database}")
-    Base.metadata.drop_all(engine)
+            session.commit()
+        
+        return Session(self.engine)
+
+
+    def drop(self):
+        self.engine.execute(f"DROP DATABASE IF EXISTS {self.name}")
+        Base.metadata.drop_all(self.engine)
