@@ -2,7 +2,6 @@ from fastapi import FastAPI
 import uvicorn
 from routers import services, transactions
 
-# TODO: Refactorizaaaaar
 app = FastAPI(
     swagger_ui_parameters={"deepLinking": False},
     docs_url="/api/v1/docs",
