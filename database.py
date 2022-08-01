@@ -37,18 +37,19 @@ class Database:
             service1 = Service(
                 name="nuevo producto",
                 price="5",
-                icon_url='/home/ivan/Projects/personal/liberet-test/database/icons/1.png'
+                icon_url='/home/ivan/Projects/personal/liberet-test/backend/icons/1.png'
             )
             service2 = Service(
                 name="lanzar campaña de marketing",
                 price="1",
-                icon_url='/home/ivan/Projects/personal/liberet-test/database/icons/megafono.png'
+                icon_url='/home/ivan/Projects/personal/liberet-test/backend/icons/megafono.png'
             )
             
             service3 = Service(
                 name="Recarga",
                 price="0",
-                icon_url='/home/ivan/Projects/personal/liberet-test/database/icons/megafono.png'
+                income=True,
+                icon_url='/home/ivan/Projects/personal/liberet-test/backend/icons/megafono.png'
             )
 
             liberet = Supplier(name="Liberet", credits=100)

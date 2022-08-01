@@ -1,15 +1,18 @@
 from typing import List
-from fastapi import APIRouter, Depends, status, Response
+from fastapi import APIRouter, Response, status
 from database import Database
 from entities import Service
 import schemas
 
 router = APIRouter()
 database = Database()
+# database.drop()
+# database = Database()
+# database.init()
 session = database.get_session()
 
 @router.get(
-    "/",
+    "",
     status_code=status.HTTP_201_CREATED,
     response_model=List[schemas.ServiceORM]
     )
@@ -25,7 +28,7 @@ def get_services():
     response_model=schemas.ServiceORM
     )
 def get_service_by_id(service_id: int):
-    """Obtiene todos los servicios"""
+    """Obtiene un servicio por su id"""
     service = session.query(Service).filter(Service.id == service_id).one()
     
     print(service)
@@ -33,7 +36,7 @@ def get_service_by_id(service_id: int):
     return service
 
 @router.post(
-    "/",
+    "",
     status_code=status.HTTP_201_CREATED,
     response_model=bool
     )
@@ -48,13 +51,3 @@ def create_service(service: schemas.ServiceORM):
     session.commit()
 
     return True
-
-@router.delete(
-    "/",
-    status_code=status.HTTP_204_NO_CONTENT,
-    response_class=Response
-    )
-def delete_service(service_id: int):
-    """Borra un servicio"""
-    session.query(Service).filter(Service.id == service_id).delete()
-    session.commit()

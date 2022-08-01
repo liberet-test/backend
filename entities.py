@@ -18,6 +18,7 @@ class Service(Base):
     __tablename__ = 'services'
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False)
+    income = Column(Boolean, nullable=False, default=False)
     price = Column(Integer, nullable=False)
     icon_url = Column(String(255), nullable=False, default="/home/ivan/Projects/personal/liberet-test/backend/icons/1.png")
     transactions = relationship("Transaction", back_populates="service", cascade="all, delete-orphan")
@@ -28,8 +29,6 @@ class Transaction(Base):
     id = Column(Integer, primary_key=True)
     supplier_id = Column(Integer, ForeignKey('suppliers.id'), nullable=False)
     service_id = Column(Integer, ForeignKey('services.id'), nullable=False)
-    income = Column(Boolean, nullable=False, default=False)
-    quantity = Column(Integer, nullable=False, default=1)
     credits = Column(Integer, nullable=False)
     
     supplier = relationship("Supplier", back_populates="transactions")

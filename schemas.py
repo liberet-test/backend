@@ -3,7 +3,7 @@ from fastapi import Body
 from typing import Optional
 
 class Recharge(BaseModel):
-    amount: int = Body(title="Amount to recharge")
+    amount: int
     
     class Config:
         schema_extra = {
@@ -12,12 +12,22 @@ class Recharge(BaseModel):
             }
         }
 
+class UseService(BaseModel):
+    service_id: int
+    quantity: int
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "service_id": 1,
+                "quantity": 5
+            }
+        }
+
 class TransactionORM(BaseModel):
     id: int
     supplier_id: int
     service_id: int
-    income: bool
-    quantity: int
     credits: int
     
     class Config:
@@ -34,9 +44,10 @@ class SupplierORM(BaseModel):
 
 class ServiceORM(BaseModel):
     id: int = Optional[None]
-    name: str = Body(description="Service name")
-    price: int = Body(description="Service price")
-    icon_url: str | None
+    name: str
+    income: bool = Optional[None]
+    price: int
+    icon_url: str = "/home/ivan/Projects/personal/liberet-test/backend/icons/1.png"
     
     class Config:
         orm_mode = True
@@ -44,6 +55,7 @@ class ServiceORM(BaseModel):
             "example": {
                 "name": "string",
                 "price": 100,
+                "income": False,
                 "icon_url": "string or None"
             }
         }
